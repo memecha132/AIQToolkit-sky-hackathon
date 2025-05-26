@@ -1,0 +1,317 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --warm-primary: #FFF8F0;
+  --warm-secondary: #FFEFDB;
+  --warm-accent: #FF9D5C;
+  --warm-button: #F57C00;
+  --warm-button-hover: #E65100;
+  --warm-text: #4A3933;
+  --warm-text-light: #7A6A63;
+  --warm-error: #E53935;
+  --warm-success: #43A047;
+  --warm-chat-bg: #FFFAF5;
+  --large-font-scale: 1.25;
+}
+
+@layer base {
+  body {
+    @apply bg-[var(--warm-primary)] text-[var(--warm-text)];
+    font-size: 18px;
+  }
+  
+  h1 {
+    @apply text-4xl font-bold;
+  }
+  
+  h2 {
+    @apply text-3xl font-bold;
+  }
+  
+  h3 {
+    @apply text-2xl font-semibold;
+  }
+  
+  button {
+    @apply text-lg;
+  }
+  
+  input, textarea {
+    @apply text-xl;
+  }
+}
+
+@layer components {
+  .alzheimer-card {
+    @apply bg-white p-6 rounded-xl shadow-md;
+  }
+  
+  .alzheimer-button {
+    @apply bg-warm-button hover:bg-warm-button-hover text-white font-bold py-3 px-6 rounded-full text-xl transition-all duration-200 shadow-md;
+  }
+  
+  .alzheimer-button-secondary {
+    @apply bg-warm-secondary hover:bg-warm-accent hover:text-white text-warm-text font-bold py-3 px-6 rounded-full text-xl transition-all duration-200 shadow-md;
+  }
+
+  .alzheimer-emergency-button {
+    @apply bg-warm-error hover:bg-red-700 text-white font-bold py-3 px-6 rounded-full text-xl transition-all duration-200 shadow-md;
+  }
+  
+  .alzheimer-chat-user {
+    @apply bg-warm-secondary p-4 rounded-2xl rounded-br-none max-w-[80%] ml-auto text-warm-text shadow-md;
+  }
+  
+  .alzheimer-chat-bot {
+    @apply bg-warm-accent bg-opacity-20 p-4 rounded-2xl rounded-bl-none max-w-[80%] mr-auto text-warm-text shadow-md;
+  }
+
+  .alzheimer-memory-card {
+    @apply bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-200;
+  }
+
+  .alzheimer-reminder-item {
+    @apply flex justify-between items-center bg-white p-4 rounded-lg mb-3 shadow-sm hover:shadow-md transition-shadow duration-200;
+  }
+}
+
+/* 自定义阴影 */
+.shadow-warm {
+  box-shadow: 0 4px 14px rgba(244, 124, 0, 0.1);
+}
+
+.shadow-warm-lg {
+  box-shadow: 0 10px 25px rgba(244, 124, 0, 0.15);
+}
+
+/* 大字体模式 */
+.large-font {
+  font-size: calc(1rem * var(--large-font-scale));
+}
+
+.large-font h1 {
+  font-size: calc(2.25rem * var(--large-font-scale));
+}
+
+.large-font h2 {
+  font-size: calc(1.875rem * var(--large-font-scale));
+}
+
+.large-font h3 {
+  font-size: calc(1.5rem * var(--large-font-scale));
+}
+
+.large-font p, .large-font span, .large-font button {
+  font-size: calc(1rem * var(--large-font-scale));
+}
+
+.large-font input, .large-font textarea {
+  font-size: calc(1.125rem * var(--large-font-scale));
+}
+
+/* 高对比度模式 */
+.high-contrast {
+  --warm-primary: #FFFFFF;
+  --warm-secondary: #F5F5F5;
+  --warm-accent: #D32F2F;
+  --warm-button: #B71C1C;
+  --warm-button-hover: #7F0000;
+  --warm-text: #000000;
+  --warm-text-light: #212121;
+  --warm-chat-bg: #FFFFFF;
+}
+
+/* 动画效果 */
+.pulse-animation {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* 响应式设计 */
+@media (max-width: 640px) {
+  .alzheimer-chat-user, .alzheimer-chat-bot {
+    max-width: 90%;
+  }
+}
+
+/* 无障碍样式增强 */
+.high-contrast {
+  --warm-text: #000000;
+  --warm-button: #0055aa;
+  --warm-button-hover: #003d7a;
+}
+
+/* 大字体模式 */
+.large-font {
+  font-size: 20px;
+}
+.large-font h1 {
+  @apply text-5xl;
+}
+.large-font h2 {
+  @apply text-4xl;
+}
+.large-font h3 {
+  @apply text-3xl;
+}
+.large-font button {
+  @apply text-2xl;
+}
+.large-font input, 
+.large-font textarea {
+  @apply text-2xl;
+}
+
+/* 音频控制样式 */
+.audio-controls {
+  @apply flex items-center gap-2 bg-[var(--warm-secondary)] p-3 rounded-full shadow-md;
+}
+
+/* 调整聊天气泡的样式 */
+.chat-message-container {
+  @apply my-4 mx-2 md:mx-4;
+}
+
+/* 为暖色调优化的滚动条 */
+::-webkit-scrollbar {
+  width: 14px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--warm-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--warm-accent);
+  border-radius: 7px;
+  border: 3px solid var(--warm-primary);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--warm-button);
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #aaa;
+}
+
+::-webkit-scrollbar-track:hover {
+  background-color: #f2f2f2;
+}
+
+::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+html {
+  background: #f4f7f2;
+  font-family: NVIDIA-NALA,Arial,Helvetica,Sans-Serif;
+}
+
+@media (max-width: 720px) {
+  pre {
+    width: calc(100vw - 110px);
+  }
+}
+
+pre:has(div.codeblock) {
+  padding: 0;
+}
+
+/* add the code bellow */ 
+@layer utilities {
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+      display: none;
+  }
+ /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;  /* Firefox */
+}
+}
+
+/* 思考过程和工具调用相关样式 */
+.intermediate-steps-container {
+  @apply mt-4 mb-6 rounded-lg border border-gray-200 dark:border-gray-700;
+}
+
+.thinking-header {
+  @apply px-4 py-2 bg-blue-50 dark:bg-blue-900/30 font-medium text-blue-700 dark:text-blue-300 rounded-t-lg border-b border-gray-200 dark:border-gray-700;
+}
+
+.final-answer-container {
+  @apply mt-4 rounded-lg;
+}
+
+.final-answer-header {
+  @apply px-4 py-2 bg-green-50 dark:bg-green-900/30 font-medium text-green-700 dark:text-green-300 rounded-t-lg mb-2;
+}
+
+/* 工具调用样式 */
+.tool-call {
+  @apply text-orange-600 dark:text-orange-400 font-medium cursor-pointer hover:text-orange-700 dark:hover:text-orange-300;
+}
+
+.tool-call-content {
+  @apply px-4 py-3 bg-orange-50 dark:bg-orange-900/20 rounded-md my-2 border-l-4 border-orange-400 dark:border-orange-600;
+}
+
+/* 详情标签样式增强 */
+details {
+  @apply my-2 rounded-md overflow-hidden border border-gray-200 dark:border-gray-700;
+}
+
+details > summary {
+  @apply px-4 py-2 bg-gray-50 dark:bg-gray-800 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 font-medium;
+  list-style: none;
+}
+
+details > summary::before {
+  content: "►";
+  @apply mr-2 text-xs inline-block transition-transform duration-200;
+}
+
+details[open] > summary::before {
+  content: "▼";
+}
+
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+/* 代码块样式增强 */
+.tool-call-content pre {
+  @apply my-2 bg-gray-800 dark:bg-black rounded-md text-white overflow-x-auto;
+}
+
+.tool-call-content code {
+  @apply font-mono text-sm;
+}

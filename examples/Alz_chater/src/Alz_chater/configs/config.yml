@@ -1,0 +1,78 @@
+# SPDX-FileCopyrightText: Copyright (c) 2024-2025, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+functions:
+  webpage_query:
+    _type: webpage_query
+    webpage_url: https://yixue.com/阿兹海默病
+    description: "查询与阿尔茨海默症有关的内容，如果是与阿尔茨海默症有关的问题，你必须先查阅该网站！"
+    embedder_name: nv-embedqa-e5-v5
+    chunk_size: 256
+  local_time_fetcher:
+    _type: local_time_fetcher
+  wechat_message_sender:
+    _type: wechat_message_sender
+  wechat_telephone_tool:
+    _type: wechat_telephone_tool
+  mac_reminder_tool:
+    _type: mac_reminder_tool
+  wechat_location_sender:
+    _type: wechat_location_sender
+  
+  
+
+llms:
+  nim_llm:
+    _type: nim
+    model_name: deepseek-ai/deepseek-r1
+    api_key: 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
+    base_url: https://integrate.api.nvidia.com/v1
+    temperature: 0.0
+    max_tokens: 4096
+
+embedders:
+  nv-embedqa-e5-v5:
+    _type: nim
+    model_name: nvidia/nv-embedqa-e5-v5
+    api_key: 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
+    base_url: https://integrate.api.nvidia.com/v1
+
+workflow:
+  _type: react_agent
+  tool_names: [webpage_query, local_time_fetcher, wechat_message_sender, wechat_telephone_tool, mac_reminder_tool, wechat_location_sender]
+  llm_name: nim_llm
+  verbose: true
+  retry_parsing_errors: true
+  max_retries: 3
+  system_prompt: | 
+    你是一位专门设计用于陪伴阿尔茨海默症患者的陪伴助手，你的工作是帮助阿尔茨海默症患者进行沟通，并帮助他们了解自己和周围人的情况。
+    你的任何回答需使用简单短句、基础词汇，避免复杂结构；对关键信息可重复强调，始终保持耐心、鼓励的语气（例如：‘没关系，我们慢慢想’‘你做得很棒’）
+    用户的输入可能会有语法错误，模糊等问题，请尽可能理解并回答。
+    尽你所能回答以下问题。你可以自由调用以下工具：
+    {tools}
+    你可通过以下两种格式之一进行回应。
+    #### 格式1：调用工具回答问题（严格使用）
+    请严格使用以下格式来调用工具回答问题：
+    Question: 你必须回答的输入问题
+    Thought: 你应当始终思考该做什么
+    Action: 需要执行的动作，必须是 [{tool_names}] 中的一个
+    Action Input: 动作的输入内容（若无需输入，请注明 “动作输入：无”）
+    Observation: 等待工具返回结果，切勿假设回应内容
+    ...（此思考 / 动作 / 动作输入 / 观察结果可重复 N 次。）
+    使用工具获取信息后，需将结果转化为符合患者认知水平的语言，避免直接输出工具返回的专业数据或复杂内容
+    #### 格式2：直接回答（无需工具时使用）
+    当你获得最终答案后，请使用以下格式：
+    Thought: 我现在知晓最终答案
+    Final Answer: 原始输入问题的最终答案
