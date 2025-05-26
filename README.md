@@ -27,5 +27,20 @@ NVIDIA Agent Intelligence (AIQ) toolkit is a flexible, lightweight, and unifying
 ## 后端：example/Alz_chater
 ### mcp工具页面：examples\Alz_chater\src\Alz_chater\Alz_chater_function.py
 ### config：examples\Alz_chater\src\Alz_chater\configs\config.yml
+### 环境配置见AIQ工具主仓库配置
+### 运行我们的后端服务器
+```python
+# 安装依赖
+uv pip install -e examples/Alz_chater
+# 运行后端服务器
+aiq serve --config examples/Alz_chater/src/Alz_chater/configs/config.yml
+
 ## 前端：alzheimer-ui
+### 运行：
+```python
+# 安装依赖包
+npm install
+# 运行前端服务器
+npm run dev
+
 ### 由于大文件传输限制，这个前端工具中还缺少一些文件，之后补上
